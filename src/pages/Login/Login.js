@@ -26,7 +26,6 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    // Simple POST request with a JSON body using axios
 
   }
 

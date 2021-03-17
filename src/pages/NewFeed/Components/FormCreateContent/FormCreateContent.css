@@ -1,0 +1,14 @@
+/*
+ * FormCreateContent css File
+*/
+
+.FormCreateContent {
+    /* propertys here */
+}
+
+.form-create-content {
+    background-color: rgb(247, 247, 247);
+    padding: 20px;
+    border: 1px;
+    border-radius: 5px;
+}

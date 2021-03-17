@@ -1,0 +1,32 @@
+/*
+ * NewFeed css File
+*/
+
+.NewFeed {
+    /* propertys here */
+}
+
+.form-create-content {
+    background-color: rgb(247, 247, 247);
+    padding: 20px;
+    border: 1px;
+    border-radius: 5px;
+}
+.body-content {
+    margin: 20px 0;
+}
+
+.list-comment {
+    background-color: rgb(247, 247, 247);
+    padding: 10px;
+}
+
+.item-comment {
+    background-color: white;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.item-comment p {
+    padding-left: 5px;
+}

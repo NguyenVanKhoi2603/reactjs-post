@@ -1,5 +1,9 @@
 # Getting Started with Create React App
 
+![Tux, the Linux mascot](/src/images/login_screen.png)
+
+![Tux, the Linux mascot](/src/images/new_feed_screen.png)
+
 Setup program
 - Clone project
 ```
@@ -88,7 +92,7 @@ echo "# reactjs-post" >> README.md
 git init
 git add README.md
 git commit -m "first commit"
-git branch -M main
+git branch -M master
 git remote add origin https://github.com/NguyenVanKhoi2603/reactjs-post.git
-git push -u origin main
+git push -u origin master
 ````

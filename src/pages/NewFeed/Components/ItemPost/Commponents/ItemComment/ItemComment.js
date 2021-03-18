@@ -10,17 +10,9 @@ class ItemComment extends Component {
       comments: []
     };
   }
-  // componentWillMount(){}
-  // componentDidMount(){}
-  // componentWillUnmount(){}
-  // componentWillReceiveProps(){}
-  // shouldComponentUpdate(){}
-  // componentWillUpdate(){}
-  // componentDidUpdate(){}
 
   render() {
     return (
-
       <Accordion.Collapse eventKey="1">
         <Card className="card-item-comment">
           <Card.Body className="item-comment">

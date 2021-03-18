@@ -14,39 +14,24 @@ class FormCreateContent extends Component {
     };
   }
 
-  postContent() {
-    var title = this.state.title;
-    var content = this.state.content;
-    var image = this.state.image;
-    var user_id = localStorage.getItem('user_id');
-    console.log(user_id, "------------------", title, content, image);
-    const post = { title: this.state.title, content: this.state.content, image: this.state.image };
+  postContent = () => {
+    var user_id = localStorage.getItem('id');
+    const post = { title: this.state.title, content: this.state.content, image: this.state.image, user_id: user_id };
     axios.post('http://localhost:3001/post', post)
       .then(response => {
         console.log(response.data);
-        if (response.data.login) {
-          console.log("Notification: " + response.data.login);
+        if (response.data.message) {
           alert(response.data.message);
         } else {
           alert(response.data.message);
         }
       });
-
   }
-  // componentWillMount(){}
-  // componentDidMount(){}
-  // componentWillUnmount(){}
-
-  // componentWillReceiveProps(){}
-  // shouldComponentUpdate(){}
-  // componentWillUpdate(){}
-  // componentDidUpdate(){}
 
   render() {
-    console.log("title: " + this.state.title);
     return (
       <div className="form-create-content">
-        <Form method="POST">
+        <Form>
           <Form.Group controlId="formBasicTitle">
             <Form.Label>Title</Form.Label>
             <Form.Control
@@ -72,8 +57,8 @@ class FormCreateContent extends Component {
               }
               placeholder="Enter link image..." />
           </Form.Group>
-          <Button onClick={this.postContent} variant="primary" type="submit">
-            Submit
+          <Button onClick={this.postContent} variant="outline-info" className="d-flex justify-content-center" type="submit">
+            PUBLISH
               </Button>
         </Form>
       </div>

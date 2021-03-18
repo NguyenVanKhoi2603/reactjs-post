@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './Profile.css';
-
+import TopNavbarApp from '../../components/TopNavbarApp';
+import { Container } from 'react-bootstrap';
 class Profile extends Component {
   // constructor(props){
-    // super(props);
-    // this.state = {};
+  // super(props);
+  // this.state = {};
   // }
 
   // componentWillMount(){}
@@ -18,7 +19,12 @@ class Profile extends Component {
 
   render() {
     return (
-      <div></div>
+      <Container fluid>
+        <TopNavbarApp>
+        </TopNavbarApp>
+        Day la profile
+      </Container>
+
     );
   }
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Login.css';
 import axios from 'axios'
 import { Button, Container, Form, Card } from 'react-bootstrap';
-import { Redirect } from 'react-router';
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -58,7 +58,7 @@ class Login extends Component {
                     })
                   }} type="password" placeholder="Password" />
                 </Form.Group>
-                <Button onClick={this.login} variant="primary" type="submit" className="d-flex justify-content-center" >
+                <Button onClick={this.login} variant="outline-info" type="submit" className="d-flex justify-content-center" >
                   login
               </Button>
               </Form>

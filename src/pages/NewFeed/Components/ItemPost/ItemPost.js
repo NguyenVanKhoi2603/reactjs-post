@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import './ItemPost.css';
 import ItemComment from './Commponents/ItemComment';
-import { Card, Accordion, Button, InputGroup, FormControl, NavItem } from 'react-bootstrap';
+import { FiSend } from 'react-icons/fi';
 
+
+import { Card, Accordion, Button, InputGroup, FormControl } from 'react-bootstrap';
+import axios from 'axios';
 class ItemPost extends Component {
   constructor(props) {
     super(props);
@@ -10,7 +13,9 @@ class ItemPost extends Component {
       id: 0,
       error: null,
       isLoaded: false,
-      comments: []
+      comments: [],
+      content: "",
+
     };
   }
 
@@ -34,9 +39,28 @@ class ItemPost extends Component {
       )
   }
 
+  PublishComment = (post_id) => {
+    var user_id = localStorage.getItem('id');
+    const comment = { user_id: user_id, post_id: post_id, content_comment: this.state.content };
+    axios.post('http://localhost:3001/comment', comment)
+      .then(response => {
+        if (response.data.message) {
+          alert("Notification: " + response.data.message);
+        }
+      });
+  }
+
+  handleClick() {
+    alert("Click comment ")
+  }
+
+
+
   render() {
-    const { error, isLoaded, comments } = this.state;
+    const { comments } = this.state;
+
     var i = 0;
+    var id_post = this.props.dataPost.id;
     if (comments.length > 0) {
       for (const item of comments) {
         if (item.post_id === this.props.dataPost.id) {
@@ -75,17 +99,19 @@ class ItemPost extends Component {
                         <FormControl
                           placeholder="Enter comment..."
                           aria-label="Enter comment..."
+                          onChange={e => this.setState({
+                            content: e.target.value
+                          })}
                           aria-describedby="basic-addon2"
                         />
                         <InputGroup.Append>
-                          <Button variant="outline-secondary">Comment</Button>
+                          <Button onClick={this.PublishComment.bind(this, id_post)} variant="outline-info"><FiSend></FiSend></Button>
                         </InputGroup.Append>
                       </InputGroup>
                     </div>
                   </Card.Footer>
                 </Card>
               </Accordion>
-
             </div>
           </Card.Body>
         </Card>

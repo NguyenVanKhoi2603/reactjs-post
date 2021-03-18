@@ -58,7 +58,6 @@ class NewFeed extends Component {
               {items.map(item => (
                 <ItemPost key={item.id} dataPost={item}></ItemPost>
               ))}
-
             </div>
           </Col>
           <Col xl={3}></Col>

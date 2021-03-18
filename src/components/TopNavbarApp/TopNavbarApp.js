@@ -8,6 +8,12 @@ class TopNavbarApp extends Component {
   // super(props);
   // this.state = {};
   // }
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    localStorage.removeItem('id');
+    window.location.href = "/login";
+  }
 
   render() {
     return (
@@ -20,7 +26,7 @@ class TopNavbarApp extends Component {
           </Nav>
           <Form inline>
             <h5 className="mx-2">Khoi</h5>
-            <Button href="/login" variant="outline-danger">Logout</Button>
+            <Button onClick={this.logout} variant="outline-danger">Logout</Button>
           </Form>
         </Navbar.Collapse>
       </Navbar>

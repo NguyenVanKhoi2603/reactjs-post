@@ -11,26 +11,31 @@ class Login extends Component {
       password: "",
     };
   }
+
   login = () => {
-    const username = { username: "nexpando", password: "123456" };
-    //const password = { password: "123456" };
+    const username = { username: this.state.username, password: this.state.password };
     axios.post('http://localhost:3001/login', username)
       .then(response => {
-        console.log(response.data);
+
         if (response.data.login) {
-          console.log("login status: " + response.data.login);
-          <Redirect to="/">
-          </Redirect>
+
+          localStorage.setItem('token', response.data.accessToken);
+          localStorage.setItem('username', this.state.username);
+          localStorage.setItem('id', response.data.user_id);
+          alert(response.data.message);
+          window.location.href = "/";
+        } else {
+          alert(response.data.message);
+          window.location.href = "/login";
         }
       });
   }
 
   componentDidMount() {
-
   }
 
   render() {
-    console.log(this.state);
+
     return (
       <Container>
         <div className="d-flex justify-content-center align-items-center form-login">

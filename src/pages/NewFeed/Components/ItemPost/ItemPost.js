@@ -1,18 +1,49 @@
 import React, { Component } from 'react';
 import './ItemPost.css';
-import { Button, Card, Accordion, InputGroup, FormControl } from 'react-bootstrap';
+import ItemComment from './Commponents/ItemComment';
+import { Card, Accordion, Button, InputGroup, FormControl, NavItem } from 'react-bootstrap';
 
 class ItemPost extends Component {
   constructor(props) {
     super(props);
     this.state = {
       id: 0,
-      title: "",
-      content: ""
-
+      error: null,
+      isLoaded: false,
+      comments: []
     };
   }
+
+  componentDidMount() {
+    fetch("http://localhost:3001/comment/")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+            comments: result
+          });
+        },
+        (error) => {
+          console.log("Error =======" + error);
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+  }
+
   render() {
+    const { error, isLoaded, comments } = this.state;
+    var i = 0;
+    if (comments.length > 0) {
+      for (const item of comments) {
+        if (item.post_id === this.props.dataPost.id) {
+          i++;
+        }
+      }
+    }
     return (
       <div className="item">
         <Card style={{}}>
@@ -27,57 +58,40 @@ class ItemPost extends Component {
                 <Card>
                   <Card.Header>
                     <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                      Comments (9+)
+                      Comments ({i})
                     </Accordion.Toggle>
                   </Card.Header>
-                  <Accordion.Collapse eventKey="1">
+                  {comments.map(item => item.post_id === this.props.dataPost.id ? (
+                    <ItemComment key={item.id} dataComment={item}></ItemComment>
+                  ) : (<Accordion.Collapse key={item.id}>
                     <Card className="card-item-comment">
                       <Card.Body className="item-comment">
-                        <h6>Khoi Nguyen</h6>
-                        <p>This is comment</p>
                       </Card.Body>
                     </Card>
-                  </Accordion.Collapse>
-
-                  <Accordion.Collapse eventKey="1">
-                    <Card className="card-item-comment">
-                      <Card.Body className="item-comment">
-                        <h6>Khoi Nguyen</h6>
-                        <p>This is comment</p>
-                      </Card.Body>
-                    </Card>
-                  </Accordion.Collapse>
-
-                  <Accordion.Collapse eventKey="1">
-                    <Card className="card-item-comment">
-                      <Card.Body className="item-comment">
-                        <h6>Khoi Nguyen</h6>
-                        <p>This is comment</p>
-                      </Card.Body>
-                    </Card>
-                  </Accordion.Collapse>
+                  </Accordion.Collapse>))}
+                  <Card.Footer>
+                    <div className="">
+                      <InputGroup>
+                        <FormControl
+                          placeholder="Enter comment..."
+                          aria-label="Enter comment..."
+                          aria-describedby="basic-addon2"
+                        />
+                        <InputGroup.Append>
+                          <Button variant="outline-secondary">Comment</Button>
+                        </InputGroup.Append>
+                      </InputGroup>
+                    </div>
+                  </Card.Footer>
                 </Card>
               </Accordion>
-              <div className="pt-2">
-                <InputGroup>
-                  <FormControl
-                    placeholder="Enter comment..."
-                    aria-label="Enter comment..."
-                    aria-describedby="basic-addon2"
-                  />
-                  <InputGroup.Append>
-                    <Button variant="outline-secondary">Comment</Button>
-                  </InputGroup.Append>
-                </InputGroup>
-              </div>
+
             </div>
           </Card.Body>
         </Card>
       </div>
     );
-
   }
-
 }
 
 export default ItemPost;

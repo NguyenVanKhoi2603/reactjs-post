@@ -11,26 +11,32 @@ class NewFeed extends Component {
     this.state = {
       error: null,
       isLoaded: false,
-      items: []
+      items: [],
     };
   }
 
   componentDidMount() {
-    fetch("http://localhost:3001/")
+
+    const requestOptions = {
+      method: 'GET',
+      headers: { "Authorization": `Bearer ${localStorage.getItem('token')}` },
+    };
+    fetch("http://localhost:3001/", requestOptions)
       .then(res => res.json())
       .then(
         (result) => {
           this.setState({
             isLoaded: true,
-            items: result.posts.rows
+            items: result.posts.rows,
           });
         },
         (error) => {
-          console.log("Error =======" + error);
+
           this.setState({
             isLoaded: true,
             error
           });
+          window.location.href = "/login"
         }
       )
   }
@@ -43,11 +49,11 @@ class NewFeed extends Component {
         <div className="body-content" >
         </div>
         <Row>
-          <Col md={3}>
+          <Col xl={3} md={4}>
             <FormCreateContent>
             </FormCreateContent>
           </Col>
-          <Col md={6}>
+          <Col xl={6} md={8}>
             <div className="list-content">
               {items.map(item => (
                 <ItemPost key={item.id} dataPost={item}></ItemPost>
@@ -55,9 +61,9 @@ class NewFeed extends Component {
 
             </div>
           </Col>
-          <Col md={3}></Col>
+          <Col xl={3}></Col>
         </Row>
-      </Container>
+      </Container >
     );
   }
 }

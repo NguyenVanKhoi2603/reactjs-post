@@ -96,3 +96,23 @@ git branch -M master
 git remote add origin https://github.com/NguyenVanKhoi2603/reactjs-post.git
 git push -u origin master
 ````
+
+#### Build Nginx
+- run server
+
+1. Run project
+````
+yarn build
+````
+
+ket qua: 
+![Tux, the Linux mascot](/src/images/yarn_build.png)
+
+2. Build project by nginx
+````
+docker run -it --rm -d -p 5080:80 --name web -v ~/MyDocuments/ReactJs/post/build:/usr/share/nginx/html nginx 
+````
+
+- 5080:80: local/port
+- web: name
+- ~/: link system
